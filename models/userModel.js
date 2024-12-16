@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize")
-
+const bcrypt = require("bcrypt")
 const sequalize = require("../cofig/dbConnect")
 
 const User = sequalize.define("User", {
@@ -14,6 +14,10 @@ const User = sequalize.define("User", {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    email: {
+        type: DataTypes.STRING,
+        allowNull:false
+    },
     age: {
         type: DataTypes.INTEGER,
         allowNull:false
@@ -21,8 +25,24 @@ const User = sequalize.define("User", {
     role: {
         type: DataTypes.STRING,
         defaultValue:"user"
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull:false
+    },
+    passwordConfirm: {
+        type: DataTypes.STRING,
+        allowNull:false
     }
 }, {
+    hooks: {
+        beforeCreate: async (user)=>{
+            if (user.password) {
+                const salt =  bcrypt.genSaltSync(5)
+                user.password =  bcrypt.hashSync(user.password,salt)
+            }
+        }
+    }
 })
 
 

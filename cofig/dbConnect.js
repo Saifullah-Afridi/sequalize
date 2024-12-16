@@ -4,7 +4,8 @@ const { Sequelize } = require("sequelize")
 
 const sequalize = new Sequelize("user", "root", "zamayarasaran", {
     host: "localhost",
-    dialect:"mysql"
+    dialect: "mysql",
+    logging:false
 })
 
 sequalize.authenticate().then(()=>console.log('Database connected successfully.')).catch((error) => {
