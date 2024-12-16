@@ -17,6 +17,10 @@ const User = sequalize.define("User", {
     age: {
         type: DataTypes.INTEGER,
         allowNull:false
+    },
+    role: {
+        type: DataTypes.STRING,
+        defaultValue:"user"
     }
 }, {
 })
