@@ -25,7 +25,7 @@ Blog.belongsTo(User,{
 })
 
 
-//psot and user relations
+//post and user relations
 
 User.hasMany(Post, {
     foreignKey: "createdBy",
